@@ -14,6 +14,8 @@
 
 
 _arguments -C \
+  '(- *)'{-h,--help}'[show this help message and exit]' \
+  '(- *)--version[show program'"'"'s version number and exit]' \
   '(--ask-pass -k)'{-k,--ask-pass}'[ask for SSH password]' \
   '(--ask-su-pass)--ask-su-pass[ask for su password]' \
   '(--ask-sudo-pass -K)'{-K,--ask-sudo-pass}'[ask for sudo password]' \
@@ -25,7 +27,6 @@ _arguments -C \
   '(--flush-cache)--flush-cache[clear the fact cache]' \
   '(--force-handlers)--force-handlers[run handlers even if a task fails]' \
   '(--forks -f)'{-f\ FORKS,--forks=FORKS}'[specify number of parallel processes to use (default=5)]' \
-  '(--help -h)'{-h,--help}'[show this help message and exit]' \
   '(--inventory -i-file)'{-i\ INVENTORY,--inventory-file=INVENTORY}'[specify inventory host file (default=/etc/ansible/hosts)]' \
   '(--limit -l)'{-l\ SUBSET,--limit=SUBSET}'[further limit selected hosts to an additional pattern]' \
   '(--list-hosts)--list-hosts[outputs a list of matching hosts; does not execute anything else]' \
@@ -45,5 +46,4 @@ _arguments -C \
   '(--user -u)'{-u\ REMOTE_USER,--user=REMOTE_USER}'[connect as this user (default=logged_in_user)]' \
   '(--vault-password-file=VAULT_PASSWORD_FILE)--vault-password-file=VAULT_PASSWORD_FILE[vault password file]' \
   '(--verbose -v)'{-v,--verbose}'[verbose mode (-vvv for more, -vvvv to enable connection debugging)]' \
-  '(--version)--version[show program'"'"'s version number and exit]' \
   '*:files:_files' \
