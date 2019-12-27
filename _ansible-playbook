@@ -13,6 +13,9 @@
 #
 
 
+local context state state_descr line
+typeset -A opt_args
+
 _arguments -C \
   '(- *)'{-h,--help}'[show this help message and exit]' \
   '(- *)--version[show program'"'"'s version number and exit]' \
@@ -34,7 +37,7 @@ _arguments -C \
   '(--module-path -M)'{-M\ MODULE_PATH,--module-path=MODULE_PATH}'[specify path(s) to module library (default=None)]' \
   '(--private-key)--private-key=PRIVATE_KEY_FILE[use this file to authenticate the connection]' \
   '(--skip-tags)--skip-tags=SKIP_TAGS[only run plays and tasks whose tags do not match these values]' \
-  '(--start-at-task)--start-at-task=[start the playbook at the task matching this name]' \
+  '(--start-at-task)--start-at-task=[start the playbook at the task matching this name]: :->START_AT_TASK' \
   '(--step)--step[one-step-at-a-time: confirm each task before running]' \
   '(--su -S)'{-S,--su}'[run operations with su]' \
   '(--su-user -R)'{-R\ SU_USER,--su-user=SU_USER}'[run operations with su as this user (default=root)]' \
@@ -47,3 +50,14 @@ _arguments -C \
   '(--vault-password-file=VAULT_PASSWORD_FILE)--vault-password-file=VAULT_PASSWORD_FILE[vault password file]' \
   '(--verbose -v)'{-v,--verbose}'[verbose mode (-vvv for more, -vvvv to enable connection debugging)]' \
   '*:files:_files' \
+
+
+case $state in
+  START_AT_TASK)
+    tasklist=( ${(f)"$(
+      ansible-playbook --list-tasks $line 2> /dev/null | sed 's/^[ ]*//;s/[ ]*$//' | sed -r 's/[\t]+TAGS:.*//'
+    )"} )
+    compadd -V unsorted -a tasklist
+    ;;
+esac
+
