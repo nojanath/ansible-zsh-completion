@@ -55,7 +55,7 @@ _arguments -C \
 case $state in
   START_AT_TASK)
     tasklist=( ${(f)"$(
-      ansible-playbook --list-tasks $line 2> /dev/null | sed 's/^[ ]*//;s/[ ]*$//' | sed -r 's/[\t]+TAGS:.*//'
+      ansible-playbook --list-tasks ${~line} 2> /dev/null | grep 'TAGS: \[' | sed 's/^[ ]*//;s/[ ]*$//' | sed -r 's/[\t]+TAGS: \[.*//'
     )"} )
     compadd -V unsorted -a tasklist
     ;;
