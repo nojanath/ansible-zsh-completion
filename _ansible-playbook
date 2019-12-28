@@ -30,7 +30,7 @@ _arguments -C \
   '(--flush-cache)--flush-cache[clear the fact cache]' \
   '(--force-handlers)--force-handlers[run handlers even if a task fails]' \
   '(--forks -f)'{-f\ FORKS,--forks=FORKS}'[specify number of parallel processes to use (default=5)]' \
-  '(--inventory -i-file)'{-i\ INVENTORY,--inventory-file=INVENTORY}'[specify inventory host file (default=/etc/ansible/hosts)]' \
+  '(--inventory -i-file)'{-i=,--inventory-file=}'[specify inventory host file (default=/etc/ansible/hosts)]: :_files' \
   '(--limit -l)'{-l\ SUBSET,--limit=SUBSET}'[further limit selected hosts to an additional pattern]' \
   '(--list-hosts)--list-hosts[outputs a list of matching hosts; does not execute anything else]' \
   '(--list-tasks)--list-tasks[list all tasks that would be executed]' \
